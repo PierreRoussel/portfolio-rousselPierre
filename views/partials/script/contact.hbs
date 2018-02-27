@@ -1,0 +1,93 @@
+<script src="/javascript/jquery-3.2.1.min.js"></script>
+<script src="/javascript/materialize.min.js"></script>
+<script src="/javascript/init.js"></script>
+<script>
+    /* VALIDATION D'ADRESSE MAIL */
+    function validateEmail(sEmail) {
+        var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
+        if (!sEmail.match(reEmail)) {
+            return false;
+        }
+        return true;
+
+    }
+    /* POUR QUE LE TEXTE INDEX DEFILE COMME ECRIS A LA MAIN */
+    var i = 0;
+    var txt = 'renez contact';
+
+    function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("titre-contact").innerHTML += txt.charAt(i);
+            i++;
+            if (document.body.clientWidth > 600) {
+                setTimeout(typeWriter, 100);
+            } else {
+                setTimeout(typeWriter, 0);
+            }
+        }
+    }
+    window.onload = typeWriter;
+
+
+    /* MULTI STEP FORM */
+    var currentTab = 0;
+    showTab(currentTab);
+
+    function showTab(n) {
+        var x = document.getElementsByClassName("tab");
+        var firstInput = document.querySelector("#name");
+        var texteArea = document.querySelector("#texte");
+        var mailArea = document.querySelector("#email");
+        x[n].style.display = "block";
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+            firstInput.addEventListener("keyup", function() {
+                if (firstInput.value == "") {
+                    document.getElementById("nextBtn").classList.add("disable");
+                } else {
+                    document.getElementById("nextBtn").classList.remove("disable");
+                }
+            })
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+            texteArea.addEventListener("keyup", function() {
+                if (texteArea.value == "") {
+                    document.getElementById("nextBtn").classList.add("disable");
+                } else {
+                    document.getElementById("nextBtn").classList.remove("disable");
+                }
+            })
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Envoyer";
+            mailArea.addEventListener("keyup", function() {
+                if (mailArea.value == "") {
+                    document.getElementById("nextBtn").classList.add("disable");
+                } else if (validateEmail(mailArea.value)) {
+                    document.getElementById("nextBtn").classList.remove("disable");
+                } else {
+                    document.getElementById("nextBtn").classList.add("disable");
+                    mailArea.dataError = true;
+                }
+            })
+        } else {
+            document.getElementById("nextBtn").style.display = "inline";
+        }
+    }
+
+    function nextPrev(n) {
+        var x = document.getElementsByClassName("tab");
+        x[currentTab].style.display = "none";
+        currentTab = currentTab + n;
+        if (currentTab >= x.length) {
+            document.getElementById("nextBtn").style.display = "none";
+            document.getElementById("prevBtn").style.display = "none";
+            document.getElementById("form-contact").submit();
+            return false;
+        } else {
+            document.getElementById("nextBtn").classList.add("disable");
+            showTab(currentTab);
+        }
+    }
+
+</script>

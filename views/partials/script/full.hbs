@@ -1,0 +1,31 @@
+<!--  Scripts -->
+<script src="/javascript/jquery-3.2.1.min.js"></script>
+<script src="/javascript/materialize.min.js"></script>
+<script src="/javascript/init.js"></script>
+<!--  Points of interest script -->
+<script>
+    $('.carousel.carousel-slider').carousel({
+        fullWidth: true
+    });
+    setInterval(function() {
+        $('.carousel.carousel-slider').carousel('next');
+    }, 4000);
+
+
+    var options = [{
+        selector: '#staggered-test',
+        offset: 400,
+        callback: function(el) {
+            Materialize.fadeInImage($(el));
+
+        }
+    }, {
+        selector: '#image-test',
+        offset: 500,
+        callback: function(el) {
+            Materialize.fadeInImage($(el));
+        }
+    }];
+    Materialize.scrollFire(options);
+
+</script>

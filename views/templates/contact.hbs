@@ -1,0 +1,75 @@
+<div class="container container-page">
+    <div class="col l12">
+        <div class="row">
+            <h3 class="left" id="titre-contact">P</h3>
+        </div>
+        <div class="row">
+            <p class="contact-text">Si vous voulez prendre contact avec, discuter d'un projet, d'une offre d'emploi ou juste passer le bonjour,<br>remplissez les champs du formulaire ou envoyez un e-mail à <b>pierre.roussel1@epsi.fr</b> et je vous répondrai dans les plus brefs délais !</p>
+            <div class="form-container container">
+                <div class="row">
+                    <form id="form-contact" action="contact-form" method="post">
+                        <div class="contact-form-step center">
+                            {{#if success}}
+                            <h5 style="color:green"><i class="material-icons">verified_user</i>Votre message a bien été envoyé, je vous répondrais dans les plus brefs délais !</h5>
+                        </div>
+                    </form>
+                </div>
+                {{else}}
+                <h5>M'envoyer un message</h5>
+                <div class="tab">
+                    <div class="input-field">
+                        <input type="text" name="name" id="name" class="validate inputContactField" />
+                        <label id="field-label" for="name">Votre nom</label></div>
+                </div>
+                <div class="tab">
+                    <div class="input-field">
+                        <textarea type="text" name="texte" id="texte" class="validate inputContactField"></textarea>
+                        <label id="field-label" for="texte">Votre message</label>
+                    </div>
+                </div>
+                <div class="tab">
+                    <div class="input-field">
+                        <input type="email" name="email" id="email" class="validate inputContactField" />
+                        <label for="email" id="field-label" data-error="saisissez une adresse telle que adress@domaine.x">Votre adresse mail</label>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <div>
+            <div class="center">
+                <button type="button" id="prevBtn" class="navBtnContact" onclick="nextPrev(-1)">Précédent</button>
+                <button type="button" id="nextBtn" class="navBtnContact disable" onclick="nextPrev(1)">Suivant</button>
+            </div>
+        </div>{{/if}}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col l12">
+        <div class="row">
+            <h4 class="left" id="titre-contact2">Me retrouver sur les réseaux</h4>
+        </div>
+        <div class="row">
+            <p>Vous pouvez bien entendu me suivre sur ma page Facebook officielle ou alors mon profil pro Linkedin. Et même suivre mes travaux sur GitHub !</p>
+            <div class="col l4 m1"></div>
+            <div class="social-media-link center">
+                <div class="col l1 m12">
+                    <a class="link-desc" href="https://www.linkedin.com/in/pierre-roussel1/" target="_blank"><i class="fa fa-linkedin-square"></i>
+                    <div class="link-desc">linkedin</div></a>
+                </div>
+                <div class="col l1">
+                    <a class="link-desc" href="/" target="_blank"><i class="fa fa-facebook-square"></i>
+                    <div class="link-desc">facebook</div></a>
+                </div>
+                <div class="col l1">
+                    <a class="link-desc" href="https://github.com/PierreRoussel" target="_blank"><i class="fa fa-github-square"></i>
+                    <div class="link-desc">github</div></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>{{> page/footer}}{{> script/contact}} {{> script/full}}
